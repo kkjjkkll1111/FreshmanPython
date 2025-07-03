@@ -48,7 +48,7 @@ print(f"내이름은 {name}입니다, 나이는 {age}살입니다")
 # print(x + y)                # 30
 
 # 방법2
-# x = input("숫자1 : ")       # 20
+# x = input("숫자1 : ")       # 10
 # y = input("숫자2 : ")       # 20
 # print(int(x) + int(y))     # 30
 
@@ -60,12 +60,12 @@ a = "hello"
 
 # 예상값 작성하고 출력해보기
 # print(a)          # hello
-# print(a[0])       # ???
-# print(a[1:])      # ???
-# print(a[1:4])     # ???
-# print(a[::2])     # ???
-# print(a[-1])      # ???
-# print(a[::-1])    # ???
+# print(a[0])       # h
+# print(a[1:])      # ello
+# print(a[1:4])     # ell
+# print(a[::2])     # hlo
+# print(a[-1])      # o
+# print(a[::-1])    # olleh
 
 
 # 5. 문자열 메소드 (모두 출력해보기)
@@ -73,20 +73,20 @@ test = "do python for funny"
 
 # 5-1. count(문자 세는 역할)
 # print(test.count('o'))        # 3
-# print(test.count('O'))        # ???
+# print(test.count('O'))        # 0
 
 # 5-2. find(문자열이 어디에 있는지 확인, 인덱스 반환)
 # print(test.find('o'))         # 2
-# print(test.find('q'))         # ??
-# print(test.find('on'))        # ??
-# print(test.find('qn'))        # ??
+# print(test.find('q'))         # -1
+# print(test.find('on'))        # 7
+# print(test.find('qn'))        # -1
 
 # 5-3. index(문자열이 어디에 있는지 확인, 인덱스 반환)
 # print(test.index('o'))        # 2
-# print(test.index('q'))        # ???
-# print(test.index('on'))       # ???
+# print(test.index('q'))        # ValueError
+# print(test.index('on'))       # 7
 
-# 5-4. if문 조건 바꿔서 출력해보기
+# 5-4. index 유효성 검사
 # if "qn" in test:
 #     print(test.index('qn'))
 # else:
@@ -113,7 +113,7 @@ print(test.capitalize())
 
 # 5-6. join(문자 사이사이에 원하는 값 끼워넣기)
 # print(" ".join(test))
-# 예상 출력값 적어보기
+# => d o   p y t h o n   f o r   f u n n y
 
 
 # 5-7. strip(공백 제거, 방향 지정 가능)
@@ -129,7 +129,7 @@ test = "   Tralalero Tralala   "
 
 # 5-9. split(문자열 쪼개기, 기본값 : 스페이스)
 # print(test.split())
-# print(test.split("r")) # i기준으로 쪼개짐(단, 쪼개지는 기준은 삭제된다)
+# print(test.split("r")) # r기준으로 쪼개짐(단, 쪼개지는 기준은 삭제된다)
 
 
 

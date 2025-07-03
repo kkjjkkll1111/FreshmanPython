@@ -99,11 +99,11 @@ animals = ["cat", "dog", "bird"]
 # 단, 인덱스가 리스트의 길이보다 클경우 IndexError발생
 
 # 3-4. remove(지우기, 지운 값 반환 X)
-# popdata = animals.remove("cat")
+# popdata = animals.remove()
 # print(animals, popdata)
 # => ["dog", "bird"], None
 # remove 메소드는 리스트의 원하는 값을 제거만 하고, 제거된 값을 리턴해주지 않음
-# 단, 지우고 싶은 값을 적지 않거나, 지우고 싶은 값이 없는 경우 에러 발생
+# 단, 지우고 싶은 값을 적지 않거나, 지우고 싶은 값이 리스트에 없는 경우 에러 발생
 
 # 3-5. 유효성 검사법
 
@@ -149,8 +149,8 @@ drinks = ["coke", "sprite", "juice", "milk", "fanta",
 
 arr_int = [1, 4, 5, 2, 3]
 arr_str = ['a', 'c', 'd', 'e', 'b']
-# print(arr_int)
-# print(arr_str)
+print(arr_int)
+print(arr_str)
 
 # 3-1. sort(정렬)
 
