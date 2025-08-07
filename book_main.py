@@ -1,6 +1,5 @@
-from operator import index
-
 from book import Book
+from datetime import *
 
 books = []
 
@@ -91,18 +90,25 @@ def borrow_book():
             continue
         borrowable_book_list.append(book)
 
+    if not borrowable_book_list:
+        print("대여 가능한 도서가 없습니다.")
+        return
     print("=== 대여가능 도서목록 ===")
     for i, book in enumerate(borrowable_book_list):
         print(f"[{i+1}] : {book.name} (author : {book.author})")
 
-    idx = int(input("대여하고 싶은 번호 선택\n -->"))
-    if idx < 0 or idx > len(borrowable_book_list):
-        print("선택 오류")
-        return
-
-    book = borrowable_book_list[idx - 1]
-    book.is_borrowed = True
-    print("성공적으로 대여가 되었습니다")
+    try:
+        choice = int(input("\n대여하고 싶은 도서의 번호를 선택하세요 --> "))
+        if 1 <= choice and choice <= len(borrowable_book_list):
+            book = borrowable_book_list[choice - 1]
+            book.is_borrowed = True
+            book.due_date = date.today() - timedelta(days=1)
+            print(f"'{book.name}' 도서가 성공적으로 대여되었습니다.")
+            print(f"{book.name}의 반납 예정일은 {book.due_date.strftime("%Y-%m-%d")}입니다.")
+        else:
+            print("잘못된 번호를 선택하셨습니다.")
+    except ValueError:
+        print("숫자를 입력해주세요.")
 
 
 def return_book():
@@ -111,6 +117,10 @@ def return_book():
     for book in books:
         if book.is_borrowed:
             is_borrowed_book_list.append(book)
+
+    if not is_borrowed_book_list:
+        print("반납할 도서가 없습니다.")
+        return
 
     print("반납하실 도서를 선택하세요")
     for i, book in enumerate(is_borrowed_book_list):
@@ -124,6 +134,7 @@ def return_book():
 
     book = is_borrowed_book_list[idx - 1]
     book.is_borrowed = False
+    book.due_date = None
     print("성공적으로 반납이 되었습니다")
 
 
