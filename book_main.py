@@ -102,7 +102,7 @@ def borrow_book():
         if 1 <= choice and choice <= len(borrowable_book_list):
             book = borrowable_book_list[choice - 1]
             book.is_borrowed = True
-            book.due_date = date.today() - timedelta(days=1)
+            book.due_date = date.today() + timedelta(weeks=2)
             print(f"'{book.name}' 도서가 성공적으로 대여되었습니다.")
             print(f"{book.name}의 반납 예정일은 {book.due_date.strftime("%Y-%m-%d")}입니다.")
         else:
