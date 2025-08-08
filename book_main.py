@@ -1,7 +1,68 @@
 from book import Book
 from datetime import *
+import os
+
+DIRECTORY = "D:\\PythonProject\\Freshman_Python\\datas"
+FILE = os.path.join(DIRECTORY, "book_list.txt")
 
 books = []
+
+
+def setup_environment():
+    """프로그램 실행에 필요한 디렉토리가 없으면 생성합니다."""
+    if not os.path.isdir(DIRECTORY):
+        print(f"'{DIRECTORY}' 디렉토리가 없어 새로 생성합니다.")
+        os.makedirs(DIRECTORY)
+
+
+def save_data():
+    print("\n도서 정보를 파일에 저장 중입니다...")
+    with open(FILE, 'w', encoding='utf-8') as f:
+        for book in books:
+            due_date_str = book.due_date.strftime('%Y-%m-%d') if book.due_date else 'None'
+            line = f"{book.name}|{book.author}|{book.isbn}|{book.is_borrowed}|{due_date_str}\n"
+            f.write(line)
+    print("저장이 완료되었습니다.")
+
+
+def load_data():
+    if not os.path.isfile(FILE):
+        print("저장된 도서 정보 파일이 없습니다.")
+        return
+
+    print("\n저장된 도서 정보를 불러오는 중입니다...")
+    with open(FILE, 'r', encoding='utf-8') as f:
+        for line in f:
+            # 파일에서 빈 줄을 읽었을 경우 건너뜀
+            if not line.strip():
+                continue
+
+            try:
+                book_info = line.strip().split('|')
+                name = book_info[0]
+                author = book_info[1]
+                isbn = book_info[2]
+
+                # Book 객체 생성
+                book = Book(name, author, isbn)
+
+                # 대여 상태 변환 ('True' 문자열 -> True 불리언)
+                book.is_borrowed = (book_info[3] == 'True')
+
+                # 날짜 변환 ('YYYY-MM-DD' 문자열 -> date 객체)
+                due_date_str = book_info[4]
+                if due_date_str != 'None':
+                    book.due_date = datetime.strptime(due_date_str, '%Y-%m-%d').date()
+                else:
+                    book.due_date = None
+
+                books.append(book)
+            except ValueError:
+                print(f"경고: 파일의 데이터 형식이 잘못되었습니다. 해당 줄을 건너뜁니다: {line.strip()}")
+    print("정보를 모두 불러왔습니다.")
+
+
+
 
 def select_menu():
     print("\n=== 메뉴를 선택하시오 ===")
@@ -140,6 +201,8 @@ def return_book():
 
 
 if __name__ == "__main__":
+    setup_environment()
+    load_data()
 
     while True:
         selection = select_menu()
@@ -156,6 +219,7 @@ if __name__ == "__main__":
         elif selection == '6':
             return_book()
         elif selection == '7':
+            save_data()
             print("시스템을 종료합니다")
             break
         else:
